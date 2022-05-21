@@ -1,0 +1,13 @@
+cabal-version:      2.4
+name:               akinator
+version:            0.1.0.0
+
+executable akinator
+    main-is:          Main.hs
+    other-modules:    Tree
+
+    ghc-options:      -O2 -dynamic
+
+    build-depends:    base ^>=4.15.1.0
+    hs-source-dirs:   app
+    default-language: Haskell2010
