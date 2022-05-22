@@ -1,0 +1,16 @@
+cabal-version: 2.4
+name:          triangles
+version:       0.1.0.0
+
+executable triangles
+    main-is: Main.hs
+
+    ghc-options: -O2 -dynamic
+
+    build-depends:  
+        base ^>=4.15.1.0,
+        split,
+        safe
+
+    hs-source-dirs:   app
+    default-language: Haskell2010
