@@ -1,5 +1,6 @@
 module Tree
     ( Tree (Node, Leaf)
+    , showRaw
     , parse) where
 
 import Debug.Trace
@@ -31,6 +32,21 @@ show' (Node s l r) d t =
     ++ "\n"
     ++ show' l (d + 1) YesNode
     ++ show' r (d + 1) NoNode
+
+showRaw :: Tree -> String
+showRaw t = showRaw' t 0
+
+showRaw' :: Tree -> Int -> String
+showRaw' (Leaf s) d =
+       replicate (4 * d) ' '
+    ++ s
+    ++ "\n"
+showRaw' (Node s l r) d =
+       replicate (4 * d) ' '
+    ++ s
+    ++ "\n"
+    ++ showRaw' l (d + 1)
+    ++ showRaw' r (d + 1)
 
 parse' :: [(Int, String)] -> (Tree, [(Int, String)])
 parse' [(i, s)] = (Leaf s, [])
