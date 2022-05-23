@@ -1,0 +1,10 @@
+cabal-version:      2.4
+name:               creative-calc
+version:            0.1.0.0
+
+executable creative-calc
+    main-is:          Main.hs
+
+    build-depends:    base ^>=4.15.1.0
+    hs-source-dirs:   app
+    default-language: Haskell2010
