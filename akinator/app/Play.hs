@@ -4,6 +4,7 @@ module Play(play) where
 
 import Tree
 import Data.Char
+import Text.Printf
 
 ifio :: IO a -> IO a -> IO a
 ifio yes no = do
@@ -22,14 +23,14 @@ ifio yes no = do
 
 play :: Tree -> IO (Tree)
 play t@(Leaf s) = do
-    putStrLn $ "It's \ESC[34m" ++ s ++ "\ESC[0m, isn't it? [y/n](д/н)"
+    printf "It's \ESC[34m%s\ESC[0m, isn't it? [y/n](д/н)\n" s
     ifio (return t)
       (do
-        putStrLn $ "What's the right answer?"
+        putStrLn "What's the right answer?"
         ans <- getLine
-        putStrLn $ "What question differs \ESC[34m" ++ s ++ "\ESC[0m from \ESC[34m" ++ ans ++ "\ESC[0m?"
+        printf "What question differs \ESC[34m%s\ESC[0m from \ESC[34m%s\ESC[0m?\n" s ans
         question <- getLine
-        putStrLn $ "How to answer \"\ESC[34m" ++ question ++ "\ESC[0m\" about \ESC[34m" ++ ans ++ "\ESC[0m? [y/n](д/н)"
+        printf "How to answer \"\ESC[34m%s\ESC[0m\" about \ESC[34m%s\ESC[0m? [y/n](д/н)\n" question ans
         let tans = Leaf ans
         ifio (return $ Node question tans t) (return $ Node question t tans)
       )
