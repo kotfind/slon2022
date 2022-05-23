@@ -9,7 +9,7 @@ ifio :: IO a -> IO a -> IO a
 ifio yes no = do
     l <- getLine
     if l == "" then do
-        putStrLn "Wrong input!"
+        putStrLn "\ESC[31mWrong input!\ESC[0m"
         ifio yes no
     else do
         let c = toLower $ head l
@@ -17,19 +17,19 @@ ifio yes no = do
           | c `elem` ['y', 'д'] -> yes
           | c `elem` ['n', 'н'] -> no
           | otherwise -> do
-                putStrLn "Wrong input!"
+                putStrLn "\ESC[31mWrong input!\ESC[0m"
                 ifio yes no
 
 play :: Tree -> IO (Tree)
 play t@(Leaf s) = do
-    putStrLn $ "It's " ++ s ++ ", isn't it? [y/n](д/н)"
+    putStrLn $ "It's \ESC[34m" ++ s ++ "\ESC[0m, isn't it? [y/n](д/н)"
     ifio (return t)
       (do
         putStrLn $ "What's the right answer?"
         ans <- getLine
-        putStrLn $ "What question differs " ++ s ++ " from " ++ ans ++ "?"
+        putStrLn $ "What question differs \ESC[34m" ++ s ++ "\ESC[0m from \ESC[34m" ++ ans ++ "\ESC[0m?"
         question <- getLine
-        putStrLn $ "How to answer \"" ++ question ++ "\" about " ++ ans ++ "? [y/n](д/н)"
+        putStrLn $ "How to answer \"\ESC[34m" ++ question ++ "\ESC[0m\" about \ESC[34m" ++ ans ++ "\ESC[0m? [y/n](д/н)"
         let tans = Leaf ans
         ifio (return $ Node question tans t) (return $ Node question t tans)
       )
