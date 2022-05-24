@@ -4,7 +4,7 @@ version:            0.1.0.0
 
 executable akinator
     main-is:          Main.hs
-    other-modules:    Tree, Play
+    other-modules:    Tree, Play, Ifio
 
     ghc-options:      -O2 -dynamic
 
